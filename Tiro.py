@@ -1,13 +1,8 @@
-
-Exercises
-
-1. Keep score by counting target hits.
-2. Vary the effect of gravity.
-3. Apply gravity to the targets.
-4. Change the speed of the ball.
+"""
+Juego de tiro parabolico
+Autores: Rafael Valenzuela Zurita
 
 """
-
 from random import randrange
 from turtle import *
 from freegames import vector
@@ -17,19 +12,21 @@ speed = vector(0, 0)
 targets = []
 
 def tap(x, y):
-    "Respond to screen tap."
+    """ Configura la accion de los clicks dentro de la ventana """
     if not inside(ball):
         ball.x = -199
         ball.y = -199
         speed.x = (x + 200) / 25
         speed.y = (y + 200) / 25
 
+
 def inside(xy):
-    "Return True if xy within screen."
+    " Devuelve True si el objeto esta dentro de la pantalla "
     return -200 < xy.x < 200 and -200 < xy.y < 200
 
+
 def draw():
-    "Draw ball and targets."
+    " Dibuja el proyectil y los objetivos "
     clear()
 
     for target in targets:
@@ -42,8 +39,9 @@ def draw():
 
     update()
 
+
 def move():
-    "Move ball and targets."
+    """ Desplaza el proyectil y los objetivos """
     if randrange(40) == 0:
         y = randrange(-150, 150)
         target = vector(200, y)
@@ -67,7 +65,7 @@ def move():
 
     for target in targets:
         if not inside(target):
-            return
+            target.x = 199
 
     ontimer(move, 50)
 
